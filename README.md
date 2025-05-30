@@ -177,7 +177,7 @@ git clone https://github.com/Swethagggg/Guardian-Bot
 cd Guardian-Bot
 npm install
 npm run dev
-
+---
 ## 📬 Contact & Support
 
 We’d love your feedback and support!
