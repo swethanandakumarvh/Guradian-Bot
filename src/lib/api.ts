@@ -1,5 +1,5 @@
 import toast from 'react-hot-toast';
-import { getResponse } from './chatResponses';
+import { getResponse, LanguageCode } from './chatResponses';
 
 interface ChatMessage {
   role: string;
@@ -13,7 +13,15 @@ interface EmergencyContext {
   status?: 'pending' | 'processing' | 'resolved';
 }
 
-const DEMO_ALERTS = [
+interface Alert {
+  id: string;
+  type: string;
+  location: string;
+  time: string;
+  status: string;
+}
+
+const DEMO_ALERTS: Alert[] = [
   {
     id: '1',
     type: 'Fire',
@@ -39,7 +47,7 @@ const DEMO_ALERTS = [
 
 let currentEmergency: EmergencyContext = {};
 
-export async function sendChatMessage(messages: ChatMessage[], language = 'en') {
+export async function sendChatMessage(messages: ChatMessage[], language: LanguageCode = 'en'): Promise<string | null> {
   try {
     const lastMessage = messages[messages.length - 1].content.toLowerCase();
     
