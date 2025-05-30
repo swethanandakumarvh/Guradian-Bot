@@ -170,13 +170,6 @@ Fosters **trust**, **transparency**, and **community collaboration**.
 - 🌐 General Public – Stay aware and connected
 
 ---
-## 🔧 Setup Instructions
-
-```bash
-git clone https://github.com/Swethagggg/Guardian-Bot
-cd Guardian-Bot
-npm install
-npm run dev
 ---
 ## 📬 Contact & Support
 
@@ -195,6 +188,12 @@ Have ideas or want to collaborate?
 
 ## 🌱 Made with purpose to build a better society.
 
-![Profile views](https://komarev.com/ghpvc/?username=ganeshswetha879&color=blue)
+![Profile views](https://komarev.com/ghpvc/?username=ganeshswetha879&color=green)
 
+## 🔧 Setup Instructions
 
+```bash
+git clone https://github.com/Swethagggg/Guardian-Bot
+cd Guardian-Bot
+npm install
+npm run dev
