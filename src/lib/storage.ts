@@ -1,11 +1,40 @@
+interface Issue {
+  type: string;
+  description: string;
+  reporter_name?: string;
+  reporter_phone?: string;
+  location: string;
+  id?: string;
+  created_at?: string;
+  status?: string;
+}
+
+interface ChatMessage {
+  role: string;
+  content: string;
+  id?: string;
+  created_at?: string;
+}
+
+interface Post {
+  caption: string;
+  hashtags: string[];
+  media_url?: string;
+  donation_goal?: number;
+  donation_current?: number;
+  location?: { lat: number; lng: number };
+  id?: string;
+  created_at?: string;
+}
+
 // Simple storage utility using localStorage
 export const storage = {
-  getIssues: () => {
+  getIssues: (): Issue[] => {
     const issues = localStorage.getItem('issues');
     return issues ? JSON.parse(issues) : [];
   },
   
-  saveIssue: (issue) => {
+  saveIssue: (issue: Issue): Issue => {
     const issues = storage.getIssues();
     const newIssue = {
       ...issue,
@@ -18,12 +47,12 @@ export const storage = {
     return newIssue;
   },
 
-  getChatMessages: () => {
+  getChatMessages: (): ChatMessage[] => {
     const messages = localStorage.getItem('chat_messages');
     return messages ? JSON.parse(messages) : [];
   },
 
-  saveChatMessage: (message) => {
+  saveChatMessage: (message: ChatMessage): void => {
     const messages = storage.getChatMessages();
     messages.push({
       ...message,
@@ -33,12 +62,12 @@ export const storage = {
     localStorage.setItem('chat_messages', JSON.stringify(messages));
   },
 
-  getPosts: () => {
+  getPosts: (): Post[] => {
     const posts = localStorage.getItem('community_posts');
     return posts ? JSON.parse(posts) : [];
   },
 
-  savePost: (post) => {
+  savePost: (post: Post): Post => {
     const posts = storage.getPosts();
     const newPost = {
       ...post,
@@ -50,7 +79,7 @@ export const storage = {
     return newPost;
   },
 
-  updatePosts: (posts) => {
+  updatePosts: (posts: Post[]): void => {
     localStorage.setItem('community_posts', JSON.stringify(posts));
   }
 };
