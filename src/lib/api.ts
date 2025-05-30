@@ -1,10 +1,17 @@
+import toast from 'react-hot-toast';
+import { getResponse } from './chatResponses';
+
 interface ChatMessage {
   role: string;
   content: string;
 }
 
-import toast from 'react-hot-toast';
-import { getResponse } from './chatResponses';
+interface EmergencyContext {
+  type?: string;
+  location?: string;
+  id?: string;
+  status?: 'pending' | 'processing' | 'resolved';
+}
 
 const DEMO_ALERTS = [
   {
@@ -30,6 +37,8 @@ const DEMO_ALERTS = [
   }
 ];
 
+let currentEmergency: EmergencyContext = {};
+
 export async function sendChatMessage(messages: ChatMessage[], language = 'en') {
   try {
     const lastMessage = messages[messages.length - 1].content.toLowerCase();
@@ -37,19 +46,40 @@ export async function sendChatMessage(messages: ChatMessage[], language = 'en') 
     // Simulate API processing time
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    // Basic intent matching
-    if (lastMessage.includes('emergency') || lastMessage.includes('help')) {
-      return getResponse('emergency.confirmation', language);
+    // Emergency flow
+    if (lastMessage.includes('emergency') || lastMessage === '1') {
+      currentEmergency = { id: Math.random().toString(36).substr(2, 9) };
+      return getResponse('emergency.type', language);
+    }
+
+    // Emergency type selection
+    if (currentEmergency.id && !currentEmergency.type) {
+      const types = ['fire', 'medical', 'crime', 'natural disaster'];
+      const matchedType = types.find(type => lastMessage.includes(type));
+      if (matchedType) {
+        currentEmergency.type = matchedType;
+        return getResponse('emergency.location', language);
+      }
+    }
+
+    // Location confirmation
+    if (currentEmergency.id && currentEmergency.type && !currentEmergency.location) {
+      currentEmergency.location = lastMessage;
+      return getResponse('emergency.confirmation', language, {
+        id: currentEmergency.id,
+        type: currentEmergency.type,
+        location: currentEmergency.location
+      });
     }
     
-    if (lastMessage.includes('alerts') || lastMessage.includes('nearby')) {
+    if (lastMessage.includes('alerts') || lastMessage.includes('nearby') || lastMessage === '3') {
       const alerts = DEMO_ALERTS.map(alert => 
         `${alert.type} at ${alert.location} (${alert.time})`
       ).join('\n');
       return `Here are the latest alerts:\n\n${alerts}`;
     }
     
-    if (lastMessage.includes('scared') || lastMessage.includes('worried')) {
+    if (lastMessage.includes('scared') || lastMessage.includes('worried') || lastMessage === '4') {
       return getResponse('mental_support.calming', language);
     }
     
