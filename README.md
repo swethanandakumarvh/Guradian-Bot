@@ -107,6 +107,41 @@ Fosters **trust**, **transparency**, and **community collaboration**.
 | Maps       | Google Maps API                      |
 
 ---
+## 🗺️ Architectural Diagram
+
+![Architectural Diagram]
+![image](https://github.com/user-attachments/assets/25796432-ad0b-4636-bf98-bfd830c1a0f4)
+
+
+**User Flow Overview:**
+
+- The user interacts via a multilingual and voice-enabled UI.
+- The frontend sends requests to the backend Node.js server.
+- The backend routes messages through:
+  - OpenAI API for intelligent conversation
+  - Translation API for multilingual response
+  - Text-to-speech/Speech-to-text for voice assistant
+- MongoDB stores chat history, reports, and user preferences.
+- Alert or report notifications are sent to relevant civic departments or shown in the dashboard.
+
+---
+
+## 📷 Screenshots
+
+> Add UI screenshots here if available
+![image](https://github.com/user-attachments/assets/42579cae-dba0-409b-b60a-63c6505e579e)
+![image](https://github.com/user-attachments/assets/44b7aed3-7d9a-439c-8417-cfe42c235af2)
+![image](https://github.com/user-attachments/assets/13ca3071-d955-43e0-897e-07f3f5386dab)
+![image](https://github.com/user-attachments/assets/614be44f-b22c-4092-a84b-bbf4e641ffea)
+![image](https://github.com/user-attachments/assets/d16406fb-7620-4566-95fd-d9cd1e48660c)
+![image](https://github.com/user-attachments/assets/44d3b154-bbad-4bee-8793-e0eed0d4f727)
+
+![image](https://github.com/user-attachments/assets/7efa9ff0-58ea-439b-8b2b-2204aa9d77c9)
+![image](https://github.com/user-attachments/assets/ec64f301-df6d-4f56-a7cf-72b90491f197)
+
+
+---
+
 
 ## 🌐 How It Works
 
@@ -135,6 +170,13 @@ Fosters **trust**, **transparency**, and **community collaboration**.
 - 🌐 General Public – Stay aware and connected
 
 ---
+## 🔧 Setup Instructions
+
+```bash
+git clone https://github.com/Swethagggg/Guardian-Bot
+cd Guardian-Bot
+npm install
+npm run dev
 
 ## 📬 Contact & Support
 
