@@ -1,3 +1,8 @@
+interface ChatMessage {
+  role: string;
+  content: string;
+}
+
 import toast from 'react-hot-toast';
 import { getResponse } from './chatResponses';
 
@@ -25,7 +30,7 @@ const DEMO_ALERTS = [
   }
 ];
 
-export async function sendChatMessage(messages, language = 'en') {
+export async function sendChatMessage(messages: ChatMessage[], language = 'en') {
   try {
     const lastMessage = messages[messages.length - 1].content.toLowerCase();
     

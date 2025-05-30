@@ -1,3 +1,22 @@
+interface Issue {
+  type: string;
+  description: string;
+  reporter_name?: string;
+  reporter_phone?: string;
+  location: string;
+}
+
+interface ChatMessage {
+  role: string;
+  content: string;
+}
+
+interface Post {
+  title: string;
+  content: string;
+  author: string;
+}
+
 // Simple storage utility using localStorage
 export const storage = {
   getIssues: () => {
@@ -5,7 +24,7 @@ export const storage = {
     return issues ? JSON.parse(issues) : [];
   },
   
-  saveIssue: (issue) => {
+  saveIssue: (issue: Issue) => {
     const issues = storage.getIssues();
     const newIssue = {
       ...issue,
@@ -23,7 +42,7 @@ export const storage = {
     return messages ? JSON.parse(messages) : [];
   },
 
-  saveChatMessage: (message) => {
+  saveChatMessage: (message: ChatMessage) => {
     const messages = storage.getChatMessages();
     messages.push({
       ...message,
@@ -38,7 +57,7 @@ export const storage = {
     return posts ? JSON.parse(posts) : [];
   },
 
-  savePost: (post) => {
+  savePost: (post: Post) => {
     const posts = storage.getPosts();
     const newPost = {
       ...post,
@@ -50,7 +69,7 @@ export const storage = {
     return newPost;
   },
 
-  updatePosts: (posts) => {
+  updatePosts: (posts: Post[]) => {
     localStorage.setItem('community_posts', JSON.stringify(posts));
   }
 };
